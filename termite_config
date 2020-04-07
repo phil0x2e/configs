@@ -1,0 +1,7 @@
+[options]
+font =  Monospace 13
+clickable_url = true
+hyperlinks = true
+[colors]
+foreground = #ede8d8
+background  = #3f3f3f
