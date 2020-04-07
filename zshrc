@@ -8,7 +8,7 @@ precmd () { vcs_info }
 zstyle ':vcs_info:git:*' formats ' (⎇ %b)'
 setopt prompt_subst
 
-PS1='%B% $fg[green][%n:%{$fg[magenta]%} %1~$fg[green]]$fg[red]$vcs_info_msg_0_%(?.$fg[green].$fg[red]) ❯ %{$reset_color%}%b'
+PS1='%B% $fg[green][%{$fg[magenta]%}%1~$fg[green]]$fg[red]$vcs_info_msg_0_%(?.$fg[green].$fg[red]) ❯ %{$reset_color%}%b'
 
 # History in cache directory:
 setopt HIST_IGNORE_SPACE
