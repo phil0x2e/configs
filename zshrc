@@ -95,4 +95,4 @@ alias ll='ls -l'
 alias ls='ls --color=auto'
 alias nv="nvim"
 
-eval "$(starship init zsh)"
+eval "$(starship init zsh 2> /dev/null)"
