@@ -1,0 +1,12 @@
+[python]
+symbol = "Python "
+
+[rust]
+symbol = "Rust "
+
+[golang]
+symbol = "Go "
+
+[java]
+symbol = "Java "
+
