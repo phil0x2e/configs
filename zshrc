@@ -94,5 +94,6 @@ export PATH="${PATH}:$HOME/.cargo/bin"
 alias ll='ls -l'
 alias ls='ls --color=auto'
 alias nv="nvim"
+alias -g grep="grep --color=auto"
 
 eval "$(starship init zsh 2> /dev/null)"
