@@ -96,4 +96,6 @@ alias ls='ls --color=auto'
 alias nv="nvim"
 alias -g grep="grep --color=auto"
 
+source /usr/share/fzf/key-bindings.zsh
+source /usr/share/fzf/completion.zsh
 eval "$(starship init zsh 2> /dev/null)"

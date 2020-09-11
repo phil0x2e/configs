@@ -1,15 +1,2 @@
 # Disable the newline at the start of the prompt
 add_newline = false
-
-[python]
-symbol = "Python "
-
-[rust]
-symbol = "Rust "
-
-[golang]
-symbol = "Go "
-
-[java]
-symbol = "Java "
-
