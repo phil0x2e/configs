@@ -5,22 +5,22 @@ window:
 
 font:
     normal:
-        family: monospace
+        family: FiraCode
         style: Regular
 
     bold:
-        family: monospace
+        family: FiraCode
         style: Bold
 
     italic:
-        family: monospace
+        family: FiraCode
         style: Italic
 
     bold_italic:
-        family: monospace
+        family: FiraCode
         style: Bold Italic
 
-    size: 13.5
+    size: 14
 
 schemes:
   gruvbox_dark: &gruvbox_dark
