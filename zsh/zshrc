@@ -89,6 +89,7 @@ else
 fi
 
 export PATH="${PATH}:$HOME/.cargo/bin"
+export shell=zsh
 
 # alias
 alias ll='ls -l'
