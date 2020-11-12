@@ -141,7 +141,7 @@ cursor-scroll = ns-resize
 type = custom/script
 interval = 1
 
-exec = ~/monocle.sh HDMI-0
+exec = ~/scripts/monocle.sh HDMI-0
 format-underline = ${colors.red}
 format-foreground = ${colors.foreground}
 format-background = ${colors.red}
@@ -151,7 +151,7 @@ label = "  Monocle %output%  "
 type = custom/script
 interval = 1
 
-exec = ~/monocle.sh DP-0
+exec = ~/scripts/monocle.sh DP-0
 format-underline = ${colors.red}
 format-foreground = ${colors.foreground}
 format-background = ${colors.red}

@@ -139,9 +139,9 @@ cursor-scroll = ns-resize
 
 [module/monocle]
 type = custom/script
-interval = 5
+interval = 2
 
-exec = ~/monocle.sh LVDS-1
+exec = ~/scripts/monocle.sh LVDS-1
 format-underline = ${colors.red}
 format-foreground = ${colors.foreground}
 format-background = ${colors.red}
@@ -149,9 +149,9 @@ label = "  Monocle %output%  "
 
 [module/monocle_hdmi]
 type = custom/script
-interval = 5
+interval = 2
 
-exec = ~/monocle.sh HDMI-1
+exec = ~/scripts/monocle.sh HDMI-1
 format-underline = ${colors.red}
 format-foreground = ${colors.foreground}
 format-background = ${colors.red}
