@@ -1,5 +1,4 @@
 #! /bin/sh
-
 pgrep -x sxhkd > /dev/null || sxhkd &
 
 bspc monitor HDMI-0 -d I II III IV V
@@ -25,12 +24,11 @@ bspc config remove_unplugged_monitors true
 
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 bash ~/.screenlayout/standard.sh &
-killall polybar ; polybar primary &
-polybar secondary &
+killall polybar; polybar primary & polybar secondary &
 start-pulseaudio-x11 &
-killall pa-applet ; pa-applet &
-killall nm-applet ; nm-applet &
-xfce4-power-manager &
+killall pa-applet; pa-applet &
+killall nm-applet; nm-applet &
+killall xfce4-power-manager; xfce4-power-manager &
 dropbox &
-pamac-tray &
+killall pamac-tray; pamac-tray &
 nitrogen --restore; sleep 1; compton -b &

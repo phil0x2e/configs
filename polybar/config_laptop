@@ -64,6 +64,7 @@ module-margin-right = 2
 font-0 = fixed:pixelsize=10;1
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = siji:pixelsize=10;1
+font-3 = NotoColorEmoji:fontformat=truetype:scale=10:antialias=false
 
 modules-left = bspwm
 modules-center = mpd monocle
@@ -114,6 +115,7 @@ module-margin-right = 2
 font-0 = fixed:pixelsize=10;1
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = siji:pixelsize=10;1
+font-3 = NotoColorEmoji:fontformat=truetype:scale=10:antialias=false
 
 modules-left = bspwm
 modules-center = mpd monocle_hdmi
@@ -145,7 +147,8 @@ exec = ~/scripts/monocle.sh LVDS-1
 format-underline = ${colors.red}
 format-foreground = ${colors.foreground}
 format-background = ${colors.red}
-label = "  Monocle %output%  "
+format-prefix = "  🖥️  "
+label = "%output%  "
 
 [module/monocle_hdmi]
 type = custom/script
@@ -155,7 +158,8 @@ exec = ~/scripts/monocle.sh HDMI-1
 format-underline = ${colors.red}
 format-foreground = ${colors.foreground}
 format-background = ${colors.red}
-label = "  Monocle %output%  "
+format-prefix = "  🖥️  "
+label = "%output%  "
 
 [module/xwindow]
 type = internal/xwindow
@@ -165,7 +169,7 @@ label = %title:0:30:...%
 type = internal/xkeyboard
 blacklist-0 = num lock
 
-format-prefix = " "
+format-prefix = "⌨️ "
 format-prefix-foreground = ${colors.foreground-alt}
 format-prefix-underline = ${colors.secondary}
 
@@ -291,18 +295,18 @@ card = intel_backlight
 [module/cpu]
 type = internal/cpu
 interval = 2
-format-prefix = " "
+format-prefix = "💻 "
 format-prefix-foreground = ${colors.foreground-alt}
 format-underline = ${colors.red}
-label = CPU: %percentage:2%%
+label = %percentage:2%%
 
 [module/memory]
 type = internal/memory
 interval = 2
-format-prefix = " "
+format-prefix = "💾 "
 format-prefix-foreground = ${colors.foreground-alt}
 format-underline = ${colors.aqua}
-label = Mem: %percentage_used%%
+label = %percentage_used%%
 
 [module/wlan]
 type = internal/network
@@ -311,7 +315,7 @@ interval = 3.0
 
 format-connected = <ramp-signal> <label-connected>
 format-connected-underline = ${colors.purple}
-label-connected = %essid%
+label-connected = 📶 %essid% - %signal%%
 
 format-disconnected =
 ;format-disconnected = <label-disconnected>
@@ -332,11 +336,11 @@ interface = enp9s0
 interval = 3.0
 
 format-connected-underline = ${colors.green}
-format-connected-prefix = " "
+format-connected-prefix = "🔗 "
 format-connected-prefix-foreground = ${colors.foreground-alt}
 label-connected = %local_ip%
-
 format-disconnected =
+
 ;format-disconnected = <label-disconnected>
 ;format-disconnected-underline = ${self.format-connected-underline}
 ;label-disconnected = %ifname% disconnected
@@ -346,27 +350,32 @@ format-disconnected =
 type = internal/date
 interval = 5
 
-date =
-date-alt = " %Y-%m-%d"
+date = %d.%m.%y
+date-alt = %d.%m.%Y
 
 time = %H:%M
 time-alt = %H:%M:%S
 
-format-prefix = 
+format-prefix = "🕓 "
 format-prefix-foreground = ${colors.foreground-alt}
 format-underline = ${colors.blue}
 
-label = %date% %time%
+label = %time% 📅 %date%
 
 [module/pulseaudio]
+
 type = internal/pulseaudio
 
-format-volume = <label-volume> <bar-volume>
-label-volume = VOL %percentage%%
+format-volume = <ramp-volume> <label-volume>
+label-volume = %percentage%%
 label-volume-foreground = ${root.foreground}
 
 label-muted = 🔇 muted
 label-muted-foreground = ${colors.gray}
+
+ramp-volume-0 = 🔈
+ramp-volume-1 = 🔉
+ramp-volume-2 = 🔊
 
 bar-volume-width = 10
 bar-volume-foreground-0 = ${colors.green}
@@ -378,11 +387,8 @@ bar-volume-foreground-5 = ${colors.yellow}
 bar-volume-foreground-6 = ${colors.red}
 bar-volume-gradient = false
 bar-volume-indicator = |
-bar-volume-indicator-font = 2
 bar-volume-fill = ─
-bar-volume-fill-font = 2
 bar-volume-empty = ─
-bar-volume-empty-font = 2
 bar-volume-empty-foreground = ${colors.foreground-alt}
 
 [module/alsa]
@@ -417,19 +423,18 @@ bar-volume-empty-foreground = ${colors.foreground-alt}
 type = internal/battery
 battery = BAT0
 adapter = ADP1
-full-at = 98
 
-label-charging = >> %percentage%% %time%
+time-format = %H:%M
+label-charging = ⚡ %percentage%% %time%
 format-charging = <animation-charging> <label-charging>
 format-charging-underline = ${colors.orange}
 
-label-discharging = << %percentage%% %time%
+label-discharging = 🔋 %percentage%% %time%
 format-discharging = <animation-discharging> <label-discharging>
 format-discharging-underline = ${self.format-charging-underline}
 
-label-full = Full
+label-full = 🔋Full
 format-full = <label-full>
-format-full-prefix = " "
 format-full-prefix-foreground = ${colors.foreground-alt}
 format-full-underline = ${self.format-charging-underline}
 
@@ -455,19 +460,15 @@ type = internal/temperature
 thermal-zone = 0
 warn-temperature = 60
 
-format = <ramp> <label>
+format-prefix = "🔥 "
+format = <label>
 format-underline = ${colors.red}
-format-warn = <ramp> <label-warn>
+format-warn = <label-warn>
 format-warn-underline = ${self.format-underline}
 
 label = %temperature-c%
 label-warn = %temperature-c%
 label-warn-foreground = ${colors.secondary}
-
-ramp-0 = 
-ramp-1 = 
-ramp-2 = 
-ramp-foreground = ${colors.foreground-alt}
 
 [module/powermenu]
 type = custom/menu
