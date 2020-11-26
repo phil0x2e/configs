@@ -68,7 +68,7 @@ font-3 = NotoColorEmoji:fontformat=truetype:scale=10:antialias=false
 
 modules-left = bspwm
 modules-center = mpd monocle_primary
-modules-right = filesystem xbacklight pulseaudio xkeyboard memory cpu wlan eth battery temperature date powermenu
+modules-right = filesystem xkeyboard memory cpu temperature wlan eth pulseaudio date
 
 tray-position = right
 tray-padding = 2
@@ -115,11 +115,11 @@ module-margin-right = 2
 font-0 = fixed:pixelsize=10;1
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = siji:pixelsize=10;1
-font-3 = NotoColorEmoji:fontformat=truetype:scale=10:antialias=false
+font-3 = NotoColorEmoji:fontformat=true:type:scale=10:antialias=false
 
 modules-left = bspwm
 modules-center = mpd monocle_secondary
-modules-right = filesystem xbacklight pulseaudio xkeyboard memory cpu wlan eth battery temperature date
+modules-right = filesystem xkeyboard memory cpu temperature wlan eth pulseaudio date
 
 tray-position = right
 tray-padding = 2
@@ -141,23 +141,23 @@ cursor-scroll = ns-resize
 
 [module/monocle_primary]
 type = custom/script
-interval = 1
+interval = 0.5
 
 exec = ~/scripts/monocle.sh HDMI-0
-format-underline = ${colors.red}
+format-underline = ${colors.primary}
 format-foreground = ${colors.foreground}
-format-background = ${colors.red}
+format-background = ${colors.primary}
 format-prefix = "  🖥️  "
 label = "%output%  "
 
 [module/monocle_secondary]
 type = custom/script
-interval = 1
+interval = 0.5
 
 exec = ~/scripts/monocle.sh DP-0
-format-underline = ${colors.red}
+format-underline = ${colors.primary}
 format-foreground = ${colors.foreground}
-format-background = ${colors.red}
+format-background = ${colors.primary}
 format-prefix = "  🖥️  "
 label = "%output%  "
 
@@ -188,6 +188,7 @@ interval = 25
 mount-0 = /
 mount-1 = /home
 
+format-mounted-underline = ${colors.secondary}
 label-mounted = %{F#458588}%mountpoint%%{F-}: %percentage_used%%
 label-unmounted = %mountpoint% not mounted
 label-unmounted-foreground = ${colors.foreground-alt}
@@ -219,44 +220,6 @@ label-empty-padding = 2
 ; Separator in between workspaces
 ; label-separator = |
 
-[module/i3]
-type = internal/i3
-format = <label-state> <label-mode>
-index-sort = true
-wrapping-scroll = false
-
-; Only show workspaces on the same output as the bar
-;pin-workspaces = true
-
-label-mode-padding = 2
-label-mode-foreground = #000
-label-mode-background = ${colors.primary}
-
-; focused = Active workspace on focused monitor
-label-focused = %index%
-label-focused-background = ${colors.background-alt}
-label-focused-underline= ${colors.primary}
-label-focused-padding = 2
-
-; unfocused = Inactive workspace on any monitor
-label-unfocused = %index%
-label-unfocused-padding = 2
-
-; visible = Active workspace on unfocused monitor
-label-visible = %index%
-label-visible-background = ${self.label-focused-background}
-label-visible-underline = ${self.label-focused-underline}
-label-visible-padding = ${self.label-focused-padding}
-
-; urgent = Workspace with urgency hint set
-label-urgent = %index%
-label-urgent-background = ${colors.alert}
-label-urgent-padding = 2
-
-; Separator in between workspaces
-; label-separator = |
-
-
 [module/mpd]
 type = internal/mpd
 format-online = <label-song>  <icon-prev> <icon-stop> <toggle> <icon-next>
@@ -270,34 +233,12 @@ icon-next = 
 label-song-maxlen = 25
 label-song-ellipsis = true
 
-[module/xbacklight]
-type = internal/xbacklight
-
-format = <label> <bar>
-label = BL
-
-bar-width = 10
-bar-indicator = |
-bar-indicator-foreground = #fff
-bar-indicator-font = 2
-bar-fill = ─
-bar-fill-font = 2
-bar-fill-foreground = ${colors.purple}
-bar-empty = ─
-bar-empty-font = 2
-bar-empty-foreground = ${colors.foreground-alt}
-
-[module/backlight-acpi]
-inherit = module/xbacklight
-type = internal/backlight
-card = intel_backlight
-
 [module/cpu]
 type = internal/cpu
 interval = 2
 format-prefix = "💻 "
 format-prefix-foreground = ${colors.foreground-alt}
-format-underline = ${colors.red}
+format-underline = ${colors.secondary}
 label = %percentage:2%%
 
 [module/memory]
@@ -305,7 +246,7 @@ type = internal/memory
 interval = 2
 format-prefix = "💾  "
 format-prefix-foreground = ${colors.foreground-alt}
-format-underline = ${colors.aqua}
+format-underline = ${colors.secondary}
 label = %percentage_used%%
 
 [module/wlan]
@@ -313,8 +254,8 @@ type = internal/network
 interface = net1
 interval = 3.0
 
-format-connected = <ramp-signal> <label-connected>
-format-connected-underline = ${colors.purple}
+format-connected = <label-connected>
+format-connected-underline = ${colors.secondary}
 label-connected = %essid%
 
 format-disconnected =
@@ -323,28 +264,19 @@ format-disconnected =
 ;label-disconnected = %ifname% disconnected
 ;label-disconnected-foreground = ${colors.foreground-alt}
 
-ramp-signal-0 = 
-ramp-signal-1 = 
-ramp-signal-2 = 
-ramp-signal-3 = 
-ramp-signal-4 = 
-ramp-signal-foreground = ${colors.foreground-alt}
-
 [module/eth]
 type = internal/network
 interface = enp34s0
 interval = 3.0
 
-format-connected-underline = ${colors.green}
+format-connected-underline = ${colors.secondary}
 format-connected-prefix = "🔗  "
 format-connected-prefix-foreground = ${colors.foreground-alt}
 label-connected = %local_ip%
 
-format-disconnected =
-;format-disconnected = <label-disconnected>
-;format-disconnected-underline = ${self.format-connected-underline}
-;label-disconnected = %ifname% disconnected
-;label-disconnected-foreground = ${colors.foreground-alt}
+format-disconnected = <label-disconnected>
+format-disconnected-underline = ${colors.red}
+label-disconnected = %ifname% disconnected
 
 [module/date]
 type = internal/date
@@ -358,17 +290,19 @@ time-alt = %H:%M:%S
 
 format-prefix = "🕓 "
 format-prefix-foreground = ${colors.foreground-alt}
-format-underline = ${colors.blue}
+format-underline = ${colors.secondary}
 
 label = "%time%  📅 %date%"
 
 [module/pulseaudio]
 type = internal/pulseaudio
 
+format-volume-underline = ${colors.secondary}
 format-volume = <ramp-volume> <label-volume>
 label-volume = %percentage%%
 label-volume-foreground = ${root.foreground}
 
+format-muted-underline = ${colors.primary}
 label-muted = 🔇 muted
 label-muted-foreground = ${colors.gray}
 
@@ -418,39 +352,6 @@ bar-volume-empty = ─
 bar-volume-empty-font = 2
 bar-volume-empty-foreground = ${colors.foreground-alt}
 
-[module/battery]
-type = internal/battery
-battery = BAT0
-adapter = ADP1
-full-at = 98
-
-format-charging = <animation-charging> <label-charging>
-format-charging-underline = ${colors.orange}
-
-format-discharging = <animation-discharging> <label-discharging>
-format-discharging-underline = ${self.format-charging-underline}
-
-format-full-prefix = " "
-format-full-prefix-foreground = ${colors.foreground-alt}
-format-full-underline = ${self.format-charging-underline}
-
-ramp-capacity-0 = 
-ramp-capacity-1 = 
-ramp-capacity-2 = 
-ramp-capacity-foreground = ${colors.foreground-alt}
-
-animation-charging-0 = 
-animation-charging-1 = 
-animation-charging-2 = 
-animation-charging-foreground = ${colors.foreground-alt}
-animation-charging-framerate = 750
-
-animation-discharging-0 = 
-animation-discharging-1 = 
-animation-discharging-2 = 
-animation-discharging-foreground = ${colors.foreground-alt}
-animation-discharging-framerate = 750
-
 [module/temperature]
 type = internal/temperature
 thermal-zone = 0
@@ -460,42 +361,14 @@ hwmon-path = /sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon0/temp1_input
 
 format = <label>
 format-prefix = "🔥  "
-format-underline = ${colors.red}
-format-warn = <label-warn>
-format-warn-underline = ${self.format-underline}
-
+format-underline = ${colors.secondary}
 label = %temperature-c%
+
+format-warn = <label-warn>
+format-warn-prefix = "🔥🔥  "
+format-warn-underline = ${colors.red}
 label-warn = %temperature-c%
 label-warn-foreground = ${colors.red}
-
-[module/powermenu]
-type = custom/menu
-
-expand-right = true
-
-format-spacing = 1
-
-label-open = 
-label-open-foreground = ${colors.secondary}
-label-close =  cancel
-label-close-foreground = ${colors.secondary}
-label-separator = |
-label-separator-foreground = ${colors.foreground-alt}
-
-menu-0-0 = reboot
-menu-0-0-exec = menu-open-1
-menu-0-1 = power off
-menu-0-1-exec = menu-open-2
-
-menu-1-0 = cancel
-menu-1-0-exec = menu-open-0
-menu-1-1 = reboot
-menu-1-1-exec = sudo reboot
-
-menu-2-0 = power off
-menu-2-0-exec = sudo poweroff
-menu-2-1 = cancel
-menu-2-1-exec = menu-open-0
 
 [settings]
 screenchange-reload = true

@@ -24,11 +24,11 @@ bspc config remove_unplugged_monitors true
 
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 bash ~/.screenlayout/standard.sh &
-killall polybar; polybar primary & polybar secondary &
 start-pulseaudio-x11 &
 killall pa-applet; pa-applet &
 killall nm-applet; nm-applet &
 killall xfce4-power-manager; xfce4-power-manager &
 dropbox &
 killall pamac-tray; pamac-tray &
+killall polybar; polybar primary & polybar secondary &
 nitrogen --restore; sleep 1; compton -b &
